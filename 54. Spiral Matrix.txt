@@ -1,0 +1,38 @@
+class Solution {
+    public List<Integer> spiralOrder(int[][] matrix) {
+        
+        int topL = 0;
+        int topR = matrix[0].length - 1;
+        int bottomL = 0;
+        int bottomR = matrix.length - 1;
+        List<Integer> spiral = new ArrayList<>();
+
+        while(spiral.size() < matrix[0].length * matrix.length){
+            for(int j = bottomL; j <= topR; j++){
+                spiral.add(matrix[topL][j]);
+            }
+            topL = topL + 1;
+
+            for(int i = topL; i <= bottomR; i++){
+                spiral.add(matrix[i][topR]);
+            }
+            topR = topR - 1;
+
+            if(topL <= bottomR){
+                for(int j = topR; j >= bottomL; j--){
+                    spiral.add(matrix[bottomR][j]);
+                }
+                bottomR = bottomR - 1;
+            }
+
+            if(bottomL <= topR){
+                for(int i = bottomR; i >= topL; i--){
+                    spiral.add(matrix[i][bottomL]);
+                }
+                bottomL = bottomL + 1;
+            }
+        }
+
+        return spiral;
+    }
+}
