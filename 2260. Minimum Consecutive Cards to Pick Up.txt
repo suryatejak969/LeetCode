@@ -1,0 +1,32 @@
+class Solution {
+    public int minimumCardPickup(int[] cards) {
+        
+        HashMap<Integer, Integer> integerCount = new HashMap<>();
+        HashMap<Integer, Integer> integerIndex = new HashMap<>();
+        int minWindow = cards.length + 1;
+
+        integerCount.put(cards[0], 1);
+        integerIndex.put(cards[0], 0);
+
+        for(int end = 1; end < cards.length; end++){
+            if(cards[end - 1] == cards[end]){
+                return 2;
+            }else{
+                int count = integerCount.getOrDefault(cards[end], 0);
+                if(count == 1){
+                    minWindow = Math.min(minWindow, end + 1 - integerIndex.get(cards[end]));
+                    integerIndex.put(cards[end], end);
+                }else{
+                    integerCount.put(cards[end], 1);
+                    integerIndex.put(cards[end], end);
+                }
+            }
+        }
+
+        if(minWindow == cards.length + 1){
+            return -1;
+        }else{
+            return minWindow;
+        }
+    }
+}
