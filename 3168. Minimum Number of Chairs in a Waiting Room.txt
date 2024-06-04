@@ -1,0 +1,21 @@
+import java.util.stream.Collectors;
+
+class Solution {
+    public int minimumChairs(String s) {
+
+        int chairs = 0;
+        int minChairs = 0;
+
+        for(int i = 0; i < s.length(); i++){
+            if(s.charAt(i) == 'E'){
+                chairs += 1;
+            }else{
+                chairs -= 1;
+            }
+
+            minChairs = Math.max(minChairs, chairs);
+        }
+
+        return minChairs;
+    }
+}
